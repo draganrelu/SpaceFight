@@ -8,9 +8,11 @@ import java.awt.event.KeyListener;
 
 import basic.Globals;
 
-public class Player {
-	private final int m_scale;
+public abstract class Player {
+	protected final int m_scale;
 	private final int m_speed;
+	protected final int m_FIREHALT;
+	protected int m_timer;
 	protected boolean[] m_keysPressed;
 	public int m_x;
 	protected int m_y;
@@ -19,7 +21,7 @@ public class Player {
 	protected int[] m_xVerts;
 	protected int[] m_yVerts;
 
-	public Player(int x, int y, Color c) {
+	public  Player(int x, int y, Color c) {
 		m_x = x;
 		m_y = y;
 		m_color = c;
@@ -27,19 +29,17 @@ public class Player {
 		m_yVerts = new int[3];
 		m_scale = 30;
 		m_speed = 5;
-		m_keysPressed = new boolean[4];
-		for (int i = 0; i < 4; i++)
+		m_FIREHALT = 20;
+		m_timer = 0;
+		m_keysPressed = new boolean[5];
+		for (int i = 0; i < m_keysPressed.length; i++)
 			m_keysPressed[i] = false;
 		computeVertices();
 		m_shape = new Polygon(m_xVerts, m_yVerts, 3);
 
 	}
 
-	public void update() {
-		Move();
-		computeVertices();
-		m_shape = new Polygon(m_xVerts, m_yVerts, 3);
-	}
+	public abstract void update();
 
 	public Polygon getShape() {
 		return m_shape;
@@ -50,19 +50,12 @@ public class Player {
 		g.setColor(m_color);
 		g.fillPolygon(m_shape);
 	}
-
-	private void computeVertices() {
-		m_xVerts[0] = m_x;
-		m_yVerts[0] = m_y - m_scale;
-		m_xVerts[1] = (int) (m_x + m_scale * Math.sqrt(3) / 2);
-		m_yVerts[1] = (int) (m_y + m_scale / 2);
-		m_xVerts[2] = (int) (m_x - m_scale * Math.sqrt(3) / 2);
-		m_yVerts[2] = (int) (m_y + m_scale / 2);
-	}
-
 	
-
-	private void Move() {
+	public abstract void Fire();
+		
+	protected abstract void computeVertices(); 
+		
+	protected void Move() {
 		if (m_keysPressed[0]) {
 			if (m_shape.getBounds().getMinY() - m_speed > 0)
 				m_y -= m_speed;

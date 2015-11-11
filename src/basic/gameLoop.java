@@ -21,13 +21,12 @@ public class gameLoop extends Applet implements Runnable{
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		x = 100;
-		y = 100;
+		
 		
 		while (true)
 		{
-			x++;
-			
+			Globals.gameTime += 1;
+						
 			repaint();
 			try {
 				Thread.sleep(20);

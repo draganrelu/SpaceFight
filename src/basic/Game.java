@@ -27,8 +27,6 @@ public class Game extends gameLoop {
 		m_screenGh.clearRect(0, 0, Globals.screenWidth, Globals.screenHeight);
 		m_screenGh.setColor(Color.cyan);
 		m_screenGh.fillRect(0, 0, Globals.screenWidth, Globals.screenHeight);
-		m_screenGh.setColor(Color.black);
-		m_screenGh.drawOval(x, y, 20, 30);
 		objMan.paintObjects(m_screenGh);
 		
 		g.drawImage(m_offscreenImg, 0, 0, this);
