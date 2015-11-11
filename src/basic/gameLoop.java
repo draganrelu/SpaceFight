@@ -6,6 +6,7 @@ import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import objects.ObjectManager;
 import objects.Player;
 import objects.Player1;
 import objects.Player2;
@@ -16,8 +17,7 @@ public class gameLoop extends Applet implements Runnable{
 	public int x,y;
 	protected Image m_offscreenImg;
 	protected Graphics m_screenGh;
-	protected Player1 p1;
-	protected Player2 p2;
+	protected ObjectManager objMan;
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub

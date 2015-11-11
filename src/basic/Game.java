@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Polygon;
 
+import objects.ObjectManager;
 import objects.Player;
 import objects.Player1;
 import objects.Player2;
@@ -17,10 +18,9 @@ public class Game extends gameLoop {
 		th.start();
 		m_offscreenImg = createImage(Globals.screenWidth, Globals.screenHeight);
 		m_screenGh = m_offscreenImg.getGraphics();
-		p1 = new Player1();
-		p2 = new Player2();
-		addKeyListener(p1);
-		addKeyListener(p2);
+		objMan = ObjectManager.getInstance();
+		addKeyListener(objMan.getPlayer1());
+		addKeyListener(objMan.getPlayer2());
 	}
 	public void paint(Graphics g)
 	{
@@ -29,9 +29,7 @@ public class Game extends gameLoop {
 		m_screenGh.fillRect(0, 0, Globals.screenWidth, Globals.screenHeight);
 		m_screenGh.setColor(Color.black);
 		m_screenGh.drawOval(x, y, 20, 30);
-		p1.paint(m_screenGh);
-		p2.paint(m_screenGh);
-		
+		objMan.paintObjects(m_screenGh);
 		
 		g.drawImage(m_offscreenImg, 0, 0, this);
 	}
@@ -39,8 +37,7 @@ public class Game extends gameLoop {
 	{
 		
 		paint(g);
-	    p1.update();
-	    p2.update();
+	    objMan.updateObjects();
 		
 	}
 }
